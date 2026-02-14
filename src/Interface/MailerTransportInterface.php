@@ -4,5 +4,5 @@ namespace App\Interface;
 
 interface MailerTransportInterface
 {
-    public function send(string $email, string $subject, string $message): bool;
+    public function send(string $email, string $subject, string $message): void;
 }
