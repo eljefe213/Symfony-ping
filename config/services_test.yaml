@@ -19,4 +19,4 @@ services:
         public: true
 
     App\Interface\MailerTransportInterface:
-        alias: App\Service\Mailer\FileTransport
+        alias: App\Service\Mailer\NullTransport
