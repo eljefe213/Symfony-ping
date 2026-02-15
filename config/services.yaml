@@ -5,6 +5,9 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+        bind:
+            string $projectDir: '%kernel.project_dir%'
+            $adminEmail: 'admin@example.com'
 
     App\:
         resource: '../src/'
@@ -13,15 +16,8 @@ services:
         resource: '../src/Controller/'
         tags: [ 'controller.service_arguments' ]
 
-    App\Service\LoggerService:
-        arguments:
-            $projectDir: '%kernel.project_dir%'
-
-    App\Service\Mailer\FileTransport:
-        arguments:
-            $projectDir: '%kernel.project_dir%'
-
     App\Service\Mailer\MailerService:
         public: true
 
-    App\Interface\MailerTransportInterface: '@App\Service\Mailer\NullTransport'
+    App\Interface\MailerTransportInterface:
+        alias: App\Service\Mailer\FileTransport
