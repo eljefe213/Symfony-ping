@@ -1,22 +1,3 @@
-parameters:
-
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        bind:
-            string $projectDir: '%kernel.project_dir%'
-            $adminEmail: 'admin@example.com'
-
-    App\:
-        resource: '../src/'
-
-    App\Controller\:
-        resource: '../src/Controller/'
-        tags: [ 'controller.service_arguments' ]
-
-    App\Service\Mailer\MailerService:
-        public: true
-
     App\Interface\MailerTransportInterface:
         alias: App\Service\Mailer\NullTransport
