@@ -1,0 +1,5 @@
+parameters:
+
+services:
+    App\Interface\MailerTransportInterface:
+        alias: App\Service\Mailer\NullTransport
