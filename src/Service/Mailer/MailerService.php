@@ -16,7 +16,7 @@ class MailerService
     public function welcome(string $email): void
     {
         $subject = 'Welcome';
-        $message = 'Bienvenue !';
+        $message = 'Hello and Welcome !';
 
         $this->logger->info('MailerService.welcome start',[
             'to' => $email,
