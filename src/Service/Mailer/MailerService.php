@@ -7,6 +7,10 @@ use Psr\Log\LoggerInterface;
 
 class MailerService
 {
+
+    private const WELCOME_SUBJECT = 'Welcome';
+    private const WELCOME_MESSAGE = 'Hello and Welcome !';
+
     public function __construct(
         private LoggerInterface $logger,
         private MailerTransportInterface $mailerTransport,
@@ -15,18 +19,16 @@ class MailerService
 
     public function welcome(string $email): void
     {
-        $subject = 'Welcome';
-        $message = 'Hello and Welcome !';
 
         $this->logger->info('MailerService.welcome start',[
             'to' => $email,
             'transport' => get_class($this->mailerTransport),
         ]);
 
-        $this->mailerTransport->send($email, $subject, $message);
+        $this->mailerTransport->send($email, self::WELCOME_SUBJECT, self::WELCOME_MESSAGE);
 
         $this->logger->info('MailerService.welcome success ',[
-            'subject' => $subject,
+            'subject' => self::WELCOME_SUBJECT,
         ]);
     }
 
