@@ -6,7 +6,7 @@ services:
         autoconfigure: true
         bind:
             string $projectDir: '%kernel.project_dir%'
-            $adminEmail: 'admin@example.com'
+            string $adminEmail: 'admin@example.com'
 
     App\:
         resource: '../src/'

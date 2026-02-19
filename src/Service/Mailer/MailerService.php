@@ -13,7 +13,7 @@ class MailerService
         private string $adminEmail,
     ) {}
 
-    public function welcome()
+    public function welcome(string $email): void
     {
         $subject = 'Welcome';
         $message = 'Bienvenue !';
