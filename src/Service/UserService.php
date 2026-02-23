@@ -4,7 +4,7 @@ namespace App\Service;
 
 class UserService
 {
-    public function __construct(private LoggerService $logger)
+    public function __construct(private readonly LoggerService $logger)
     {
 
     }

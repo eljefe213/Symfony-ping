@@ -9,7 +9,7 @@ use App\Service\Mailer\MailerService;
 
 class WelcomeController
 {
-    public function __construct(private MailerService $mailer) {}
+    public function __construct(private readonly MailerService $mailer) {}
 
     #[Route('/api/welcome', name: 'api_welcome', methods: ['POST'])]
     public function __invoke(Request $request): JsonResponse

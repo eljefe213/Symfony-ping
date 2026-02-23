@@ -10,8 +10,8 @@ class FileTransport implements MailerTransportInterface
     private string $dir;
 
     public function __construct(
-        private string $projectDir,
-        private LoggerInterface $logger,
+        private readonly string          $projectDir,
+        private readonly LoggerInterface $logger,
     ) {
         $this->dir = rtrim($this->projectDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'email';
     }
