@@ -19,7 +19,7 @@ class WelcomeController
         if (!is_array($data) || !isset($data['email']) || !is_string($data['email'])) {
             return new JsonResponse(['error' => 'Missing email'], 400);
         }
-
+        //dd($_ENV['APP_ENV'] ?? 'no env');
         $email = trim($data['email']);
         if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return new JsonResponse(['error' => 'Invalid email'], 400);
