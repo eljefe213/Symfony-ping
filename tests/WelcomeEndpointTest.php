@@ -4,20 +4,21 @@ namespace App\Tests;
 
 use App\Interface\MailerTransportInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-final class WelcomeEndpointTest extends kernelTestCase
+final class WelcomeEndpointTest extends WebTestCase
 {
-    public function testSend(): void
+    public function testWelcomeEndpointUsesNullTransportInTestEnv(): void
     {
-        self::bootKernel(['environment' => 'test']);
-        $container = static::getContainer();
+        $client = static::createClient(['environment' => 'test']);
 
-        $transport = $container->get(MailerTransportInterface::class);
-        self::assertInstanceOf(MailerTransportInterface::class, $transport);
+        $client->request('POST', '/api/welcome', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode(['email' => 'test@example.com']));
 
-        $transport->send('test@example.com', 'Welcome', 'Bienvenue à vous !');
+        self::assertResponseIsSuccessful();
+
+        $transport = static::getContainer()->get(MailerTransportInterface::class);
         self::assertCount(1, $transport->sent);
-        self::assertSame('test@example.com', $transport->sent[0]['email']);
+        self::assertSame('test@example.com', $transport->sent[0]->getEmail());
     }
 
 }
